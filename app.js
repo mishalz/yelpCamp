@@ -160,8 +160,10 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err })
 })
 
+const port = process.env.PORT || 8000
+
 //<----- server listening ----->
-app.listen(8000, () => {
-    console.log('listening on port 8000')
+app.listen(port, () => {
+    console.log(`listening on port ${port}`)
 })
 
