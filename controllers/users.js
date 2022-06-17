@@ -8,7 +8,7 @@ module.exports.register = async (req, res) => {
             if (err) {
                 return next(err)
             }
-            req.flash('success', `welcome to yelpcamp ${username}`)
+            req.flash('success', `Welcome to Yelp Camp ${username}!`)
             return res.redirect('/campgrounds')
         })
 
@@ -32,12 +32,15 @@ module.exports.renderLogin = (req, res) => {
 }
 
 module.exports.login = (req, res) => {
-    req.flash('success', `Welcome back ${req.user.username}`)
+    req.flash('success', `Welcome back ${req.user.username}!`)
     const redirectUrl = req.session.returnTo || "/campgrounds"
     delete req.session.returnTo
     res.redirect(redirectUrl)
 }
 
 module.exports.logout = (req, res) => {
-    res.render('users/register')
+    req.logout();
+    // req.session.destroy();
+    req.flash('success', "Goodbye!");
+    res.redirect('/campgrounds');
 }
